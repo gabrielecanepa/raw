@@ -8,8 +8,9 @@ on:
 
 jobs:
   build:
-    if: "!startsWith(github.event.head_commit.message, 'chore[github-actions]')"
     runs-on: ubuntu-latest
+    permissions: write-all
+    if: "!startsWith(github.ref, 'refs/tags') && !startsWith(github.event.head_commit.message, 'chore[github-actions]')"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,17 +19,15 @@ jobs:
         id: optimize_images
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          debug: true
           export-webp: true
       - name: Create pull request
         if: steps.optimize_images.outputs.markdown_report != ''
         uses: peter-evans/create-pull-request@v7
         with:
-          branch-suffix: timestamp
-          labels: optimization
-          delete-branch: true
           title: "[GitHub Actions] Optimize Images"
           body: ${{ steps.optimize_images.outputs.markdown_report }}
           commit-message: "chore[github-actions]: optimize images"
           author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          labels: optimization
+          delete-branch: true
