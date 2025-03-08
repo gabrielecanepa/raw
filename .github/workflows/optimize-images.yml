@@ -25,7 +25,6 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch-suffix: timestamp
-          base: main
           labels: optimization
           delete-branch: true
           title: "[GitHub Actions] Optimize Images"
