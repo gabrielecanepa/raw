@@ -2,8 +2,6 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
     tags:
       - v*
       - v*.*
@@ -12,13 +10,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags')
+    permissions:
+      contents: write
+    outputs:
+      body: ${{ steps.build.outputs.body }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Release
-        uses: softprops/action-gh-release@v2
         with:
-          make_latest: true
-          generate_release_notes: true
-          files: lib/*
+          fetch-depth: 0
+      - name: Get latest release
+        uses: pozetroninc/github-action-get-latest-release@v0.8.0
+        id: get_latest_release
+        with:
+          repository: ${{ github.repository }}
+      - name: Build new release
+        id: build
+        env:
+          HOST: ${{ vars.HOST }}
+          LIB: ${{ vars.LIB }}
+          REPO: ${{ github.repository }}
+          LATEST_TAG: ${{ steps.get_latest_release.outputs.release }}
+          NEW_TAG: ${{ github.ref_name }}
+        run: |
+          . ${{ github.workspace }}/bin/build-release.sh >> RELEASE.md
+      - name: Publish new release
+        uses: ncipollo/release-action@v1
+        with:
+          bodyFile: RELEASE.md
+          artifacts: lib/*
+          generateReleaseNotes: true
+          makeLatest: true
