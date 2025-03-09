@@ -22,20 +22,20 @@ https://raw.gabrielecanepa.com/{filename}
 To link a specific version, append the `v` parameter followed by a version or commit SHA (full or abbreviated):
 
 ```sh
-https://raw.gabrielecanepa.com/{filename}?v={version|commit_sha}
+https://raw.gabrielecanepa.com/{filename}?v={version|sha}
 ```
 
-To target a specific branch, use the `b` parameter with the branch name:
+Use the `b` parameter to target a specific branch:
 
 ```sh
 https://raw.gabrielecanepa.com/{filename}?b={branch}
 ```
 
-If a parameter is invalid, the latest version from the default branch will be used.
+If a parameter is invalid, the latest version from the default branch will be served.
 
 ### Examples
 
-Using the asset `avatar-notion.png`.
+Using the asset `avatar-notion.png`:
 
 - Latest version<br>
   https://raw.gabrielecanepa.com/avatar-notion.png
@@ -77,22 +77,18 @@ pnpm run dev
 Deploy by either:
 
 - Pushing to the default branch
-- Running the deploy script:
-
-  ```sh
-  pnpm run deploy
-  ```
+- Running `pnpm run deploy`
 
 ### Image optimization
 
-Image assets are optimized automatically using [this workflow](https://github.com/gabrielecanepa/raw/actions/workflows/optimize-images.yml). The action also creates compressed WebP version of new images.
+Assets are automatically optimized using [this workflow](https://github.com/gabrielecanepa/raw/actions/workflows/optimize-images.yml). The action also creates compressed WebP version of new images.
 
 ### Releases
 
 To create a release, push a new tag using the following convention:
 
 - Major `v1` - new collection of assets
-- Minor `v1.2` - new and updated assets
+- Minor `v1.2` - new assets or significant updates
 - Patch `v1.2.3` - minor updates to existing assets
 
 For example, to release `v1.0.1`:
