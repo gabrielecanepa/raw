@@ -11,7 +11,7 @@ Versioned static resources delivered at `raw.gabrielecanepa.com` via [Cloudflare
 
 ## Usage
 
-Use this URL pattern to link a resource in the [`lib`](./lib) directory:
+Use this URL pattern to link a resource in the [`lib` directory](./lib):
 
 ```sh
 https://raw.gabrielecanepa.com/{filename}
@@ -68,7 +68,7 @@ cd worker
 pnpm install
 ```
 
-Change the variables in [`wrangler.jsonc`](./worker/wrangler.jsonc) and run the worker locally:
+Change the variables in `wrangler.jsonc` and run the worker locally:
 
 ```sh
 pnpm run dev
@@ -81,7 +81,7 @@ Deploy by either:
 
 ### Image optimization
 
-Assets are automatically optimized using the action [gabrielecanepa/optimize-images](https://github.com/gabrielecanepa/optimize-images). The workflow additionally creates compressed WebP version of new images.
+Assets are automatically optimized using the action [gabrielecanepa/optimize-images](https://github.com/gabrielecanepa/optimize-images). The workflow is configured to create compressed WebP versions of new images.
 
 ### Releases
 
