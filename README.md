@@ -81,7 +81,7 @@ Deploy by either:
 
 ### Image optimization
 
-Assets are automatically optimized using [this workflow](https://github.com/gabrielecanepa/raw/actions/workflows/optimize-images.yml). The action also creates compressed WebP version of new images.
+Assets are automatically optimized using the action [gabrielecanepa/optimize-images](https://github.com/gabrielecanepa/optimize-images). The workflow additionally creates compressed WebP version of new images.
 
 ### Releases
 

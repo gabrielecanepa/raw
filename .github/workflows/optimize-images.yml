@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Optimize images
-        uses: cadamsdev/image-optimizer-action@v1
+        uses: gabrielecanepa/optimize-images@v1
         id: optimize_images
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
