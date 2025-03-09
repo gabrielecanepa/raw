@@ -9,9 +9,7 @@ diff="$(git diff "$latest".."$new" --name-status | grep "$LIB")"
 
 [ -z "$diff" ] && exit 0
 
-n=$(echo "$diff" | wc -l | xargs)
-body="This release updates **${n}** asset$(if [ "$n" -gt 1 ]; then echo "s"; fi).<br>"
-body="$body<table><tr><th>Filename</th><th>Status</th><th><code>$latest</code></th><th><code>$new</code></th></tr>"
+body="<table><tr><th>Filename</th><th>Status</th><th><code>$latest</code></th><th><code>$new</code></th></tr>"
 
 while read -r d; do
   l=$(echo "$d" | cut -c1)
@@ -20,13 +18,13 @@ while read -r d; do
 
   case $l in
     A)
-      body="$body<tr><td><code>$fn</code></td><td>Added</td><td></td><td align=\"center\"><img src=\"$base_url/$fn?v=$new\" height=\"40\"></td></tr>"
+      body="$body<tr><td><code>$fn</code></td><td>Added</td><td></td><td align=\"center\"><img src=\"$base_url/$fn?v=$new\" height=\"35\"></td></tr>"
       ;;
     M)
-      body="$body<tr><td><code>$fn</code></td><td>Modified</td><td align=\"center\"><img src=\"$base_url/$fn?v=$latest\" height=\"40\"></td><td align=\"center\"><img src=\"$base_url/$fn?v=$new\" height=\"40\"></td></tr>"
+      body="$body<tr><td><code>$fn</code></td><td>Modified</td><td align=\"center\"><img src=\"$base_url/$fn?v=$latest\" height=\"35\"></td><td align=\"center\"><img src=\"$base_url/$fn?v=$new\" height=\"35\"></td></tr>"
       ;;
     D)
-      body="$body<tr><td><code>$fn</code></td><td>Deleted</td><td align=\"center\"><img src=\"$base_url/$fn?v=$latest\" height=\"40\"></td><td></td></tr>"
+      body="$body<tr><td><code>$fn</code></td><td>Deleted</td><td align=\"center\"><img src=\"$base_url/$fn?v=$latest\" height=\"35\"></td><td></td></tr>"
       ;;
   esac
 done << EOF

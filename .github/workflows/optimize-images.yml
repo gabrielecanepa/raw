@@ -20,6 +20,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           export-webp: true
+          debug: true
       - name: Create pull request
         if: steps.optimize_images.outputs.markdown_report != ''
         uses: peter-evans/create-pull-request@v7
